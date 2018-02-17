@@ -46,19 +46,19 @@ def innings(scoreToBeat):
             score = score + int(ball)
             
         bowled = bowled + 1
-        balls = int(bowled % 6)
-        overs = int((bowled - balls) / 6)
-        print("{} - {}/{} ({}.{} overs)".format(event,score,wickets,overs,balls))
+        unfinishedOverBalls = int(bowled % 6)
+        overs = int((bowled - unfinishedOverBalls) / 6)
+        print("{} - {}/{} ({}.{} overs)".format(event,score,wickets,overs,unfinishedOverBalls))
 
         returnToMark()
 
 
-    return { "Runs": score, "Wickets": wickets, "Overs": overs, "Balls": balls }
+    return { "Runs": score, "Wickets": wickets, "Overs": overs, "Balls": unfinishedOverBalls }
 
 firstInnings = innings(noScoreToBeat)
-print("{} scores {}/{} in {}.{} overs".format(team1,firstInnings["Runs"],firstInnings["Wickets"],firstInnings["Overs"],firstInnings["Balls"]))
+print("{} score {}/{} in {}.{} overs".format(team1,firstInnings["Runs"],firstInnings["Wickets"],firstInnings["Overs"],firstInnings["Balls"]))
 secondInnings = innings(firstInnings["Runs"])
-print("{} scores {}/{} in {}.{} overs".format(team2,secondInnings["Runs"],secondInnings["Wickets"],secondInnings["Overs"],secondInnings["Balls"]))
+print("{} score {}/{} in {}.{} overs".format(team2,secondInnings["Runs"],secondInnings["Wickets"],secondInnings["Overs"],secondInnings["Balls"]))
 
 if (firstInnings["Runs"] > secondInnings["Runs"]):
     print("{} win by {} runs!".format(team1,firstInnings["Runs"] - secondInnings["Runs"]))
