@@ -24,7 +24,7 @@ def roll(dice):
     else:
         return "0"
 
-def innings(scoreToBeat):
+def innings(battingTeam,scoreToBeat):
     wickets = 0
     score = 0
     bowled = 0
@@ -48,16 +48,16 @@ def innings(scoreToBeat):
         bowled = bowled + 1
         unfinishedOverBalls = int(bowled % 6)
         overs = int((bowled - unfinishedOverBalls) / 6)
-        print("{} - {}/{} ({}.{} overs)".format(event,score,wickets,overs,unfinishedOverBalls))
+        print("{} - {} {}/{} ({}.{} overs)".format(event,battingTeam,score,wickets,overs,unfinishedOverBalls))
 
         returnToMark()
 
 
     return { "Runs": score, "Wickets": wickets, "Overs": overs, "Balls": unfinishedOverBalls }
 
-firstInnings = innings(noScoreToBeat)
+firstInnings = innings(team1,noScoreToBeat)
 print("{} score {}/{} in {}.{} overs".format(team1,firstInnings["Runs"],firstInnings["Wickets"],firstInnings["Overs"],firstInnings["Balls"]))
-secondInnings = innings(firstInnings["Runs"])
+secondInnings = innings(team2,firstInnings["Runs"])
 print("{} score {}/{} in {}.{} overs".format(team2,secondInnings["Runs"],secondInnings["Wickets"],secondInnings["Overs"],secondInnings["Balls"]))
 
 if (firstInnings["Runs"] > secondInnings["Runs"]):
