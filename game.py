@@ -36,7 +36,8 @@ def innings():
         else:
             score = score + int(ball)
             
-        print(str(score) + "/" + str(wickets))
+        print("{}/{}".format(score,wickets))
+        
         returnToMark()
 
     print("Innings over!")
