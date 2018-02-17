@@ -1,7 +1,7 @@
 import random
 import time
 
-allOutWickets = 10
+allOutWickets = 10 # can reduce this down for testing
 gameRate = 1 # seconds between balls
 
 def returnToMark():
