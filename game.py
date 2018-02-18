@@ -1,13 +1,18 @@
 import random
 import time
 
+# game contstants
+noRunsRequired = -1
+unlimitedOvers = -1
 allOutWickets = 10 # can reduce this down for testing
-gameRate = 0.25 # seconds between balls
 balls = ["0", "1", "2", "3", "4", "6", "Owzthat!"]
 decisions = ["Not Out!","Bowled!","Caught!","LBW!","Run Out!","Stumped!","Not Out!"]
-noScoreToBeat = -1
+
+# match variables
 team1 = "Sussex"
 team2 = "Kent"
+oversPerTeam = unlimitedOvers
+gameRate = 0.25 # seconds between balls
 
 def returnToMark():
     time.sleep(gameRate)
@@ -24,12 +29,16 @@ def roll(dice):
     else:
         return "0"
 
-def innings(battingTeam,scoreToBeat):
+def innings(battingTeam,maxOvers,runsRequired):
     wickets = 0
     score = 0
     bowled = 0
+    overs = 0
+    unfinishedOverBalls = 0
 
-    while wickets < allOutWickets and (not score > scoreToBeat or scoreToBeat == noScoreToBeat):
+    while wickets < allOutWickets and \
+        (not score > runsRequired or runsRequired == noRunsRequired) and \
+        (overs < maxOvers or maxOvers == unlimitedOvers):
         ball = roll("bowl")
         event = ""
         if (ball == "Owzthat!"):
@@ -55,9 +64,9 @@ def innings(battingTeam,scoreToBeat):
 
     return { "Runs": score, "Wickets": wickets, "Overs": overs, "Balls": unfinishedOverBalls }
 
-firstInnings = innings(team1,noScoreToBeat)
+firstInnings = innings(team1,oversPerTeam,noRunsRequired)
 print("{} score {}/{} in {}.{} overs".format(team1,firstInnings["Runs"],firstInnings["Wickets"],firstInnings["Overs"],firstInnings["Balls"]))
-secondInnings = innings(team2,firstInnings["Runs"])
+secondInnings = innings(team2,oversPerTeam,firstInnings["Runs"])
 print("{} score {}/{} in {}.{} overs".format(team2,secondInnings["Runs"],secondInnings["Wickets"],secondInnings["Overs"],secondInnings["Balls"]))
 
 if (firstInnings["Runs"] > secondInnings["Runs"]):
