@@ -15,12 +15,21 @@ oversPerTeam = unlimitedOvers
 gameRate = 0.25 # seconds between balls
 
 def returnToMark():
+    """ Function call to simulate the time taken 
+        for the bowler to return to their mark """
+            
     time.sleep(gameRate)
 
 def makeDecision():
+    """ Function call to simulate the time taken 
+        for the umpire to make a decision and add tension to the game """
+
     time.sleep(gameRate * 2)
 
 def roll(dice):
+    """ Function call to simulate either the roll of a dice
+        for either the bowl of a ball or an appeal decision """
+
     if (dice == "bowl"):
         return balls[random.randint(0,len(balls) - 1)]
     elif (dice == "decision"):
@@ -30,6 +39,8 @@ def roll(dice):
         return "0"
 
 def innings(battingTeam,maxOvers,runsRequired):
+    """ Function call to simulate a single innings """
+
     wickets = 0
     score = 0
     bowled = 0
